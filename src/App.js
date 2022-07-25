@@ -8,6 +8,9 @@ const AppContainer = styled.div`
   width: 100%;
   padding: 20px 15px;
   box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 const App = () => {
