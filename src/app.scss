@@ -9,13 +9,26 @@ $grayishBlue: hsl(223, 19%, 93%);
 $veryLightGray: hsl(228, 33%, 97%);
 $white: hsl(0, 0%, 100%);
 
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;600&family=Nunito+Sans:wght@300&family=Rubik&family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:;600&family=Nunito+Sans:wght@300&family=Rubik&family=Ubuntu+Condensed&display=swap");
 //FontWeights: 400, 500, 700
 
 //Mobile: 375px
 //Desktop: 1440px
+* {
+  padding: 0;
+  margin: 0;
+}
+html {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
 
 body {
+  width: 100%;
+  height: 100%;
   font-family: "Nunito Sans", sans-serif;
   p {
     font-size: 16px;

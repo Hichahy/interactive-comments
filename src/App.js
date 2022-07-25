@@ -1,12 +1,21 @@
+import "./app.scss";
+import styled from "styled-components";
+import UserComments from "./components/userComments/UserComments";
 
-import './app.scss';
+const AppContainer = styled.div`
+  background: hsl(223, 19%, 93%);
+  min-height: 100%;
+  width: 100%;
+  padding: 20px 15px;
+  box-sizing: border-box;
+`;
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      comments
-    </div>
+    <AppContainer>
+      <UserComments />
+    </AppContainer>
   );
-}
+};
 
 export default App;
