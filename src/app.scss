@@ -1,0 +1,23 @@
+//Primary
+$moderateBlue: hsl(238, 40%, 52%);
+$softRed: hsl(358, 79%, 66%);
+$lightGrayish: hsl(239, 57%, 85%);
+$paleRed: hsl(357, 100%, 86%);
+//Neutral
+$darkBlue: hsl(211, 10%, 45%);
+$grayishBlue: hsl(223, 19%, 93%);
+$veryLightGray: hsl(228, 33%, 97%);
+$white: hsl(0, 0%, 100%);
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;600&family=Nunito+Sans:wght@300&family=Rubik&family=Ubuntu+Condensed&display=swap");
+//FontWeights: 400, 500, 700
+
+//Mobile: 375px
+//Desktop: 1440px
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+  p {
+    font-size: 16px;
+  }
+}
