@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import data from "../../data.json";
 
 const CommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
@@ -155,8 +154,12 @@ const ReplyBox = styled.div`
   max-width: 48rem;
 `;
 
-const UserComments = () => {
-  return data.comments.map((i) => (
+const UserComments = ({ dataUsers }) => {
+  if (!dataUsers) {
+    return <p>loading...</p>;
+  }
+
+  return dataUsers.comments.map((i) => (
     <div key={i.id}>
       <CommentDiv>
         <div>
