@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import data from "../../data.json";
 
@@ -18,9 +18,9 @@ const NewCommentDiv = styled.div`
     flex-direcion: row;
     flex-wrap: nowrap;
     padding: 20px;
+    align-items: start;
   }
   @media (min-width: 515px) {
-    align-items: start;
   }
 `;
 
@@ -72,13 +72,45 @@ const Avatar = styled.img`
   }
 `;
 
-const NewComment = () => {
+const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
+  const [valueComment, setvalueComment] = useState("");
+
+  const handleTextArea = (e) => {
+    setvalueComment(e.target.value);
+  };
+
+  const handleButtonSend = (e) => {
+    e.preventDefault();
+    dataUsers.comments.push({
+      id: Date.now(),
+      content: valueComment,
+      createdAt: "1 month ago",
+      score: 0,
+      user: {
+        image: {
+          png: data.currentUser.image.png,
+          webp: data.currentUser.image.webp,
+        },
+        username: data.currentUser.username,
+      },
+      replies: [],
+    });
+    setDataUsers(dataUsers);
+    setvalueComment("");
+    setLoadData(true);
+    console.log(`dataUsers`, dataUsers.comments);
+  };
+
   return (
     <NewCommentContainer>
       <NewCommentDiv>
-        <TextAreaComment placeholder="Add a comment..."></TextAreaComment>
+        <TextAreaComment
+          onChange={handleTextArea}
+          value={valueComment}
+          placeholder="Add a comment..."
+        ></TextAreaComment>
         <Avatar src={data.currentUser.image.png} />
-        <SendButton>SEND</SendButton>
+        <SendButton onClick={handleButtonSend}>SEND</SendButton>
       </NewCommentDiv>
     </NewCommentContainer>
   );
