@@ -37,8 +37,8 @@ const HeaderUser = styled.header`
 `;
 
 const Avatar = styled.img`
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
 `;
 
 const UserName = styled.h1`
