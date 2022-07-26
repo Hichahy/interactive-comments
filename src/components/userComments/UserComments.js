@@ -7,7 +7,7 @@ const CommentDiv = styled.div`
   max-width: 48rem;
   border-radius: 15px;
   display: flex;
-  margin: 20px 0;
+  margin: 10px 0;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -18,6 +18,7 @@ const CommentDiv = styled.div`
     flex-wrap: nowrap;
     padding: 20px;
   }
+  ${(props) => props.reply && "width: 100%"}
 `;
 
 const HeaderComment = styled.header`
@@ -55,6 +56,10 @@ const CommentContent = styled.p`
   color: hsl(211, 10%, 45%);
   line-height: 25px;
   margin-bottom: 25px;
+  span {
+    color: hsl(238, 40%, 52%);
+    font-weight: 700;
+  }
   @media (min-width: 515px) {
     margin-bottom: 0;
   }
@@ -134,45 +139,118 @@ const ButtonReply = styled.button`
   }
 `;
 
+const LineReply = styled.div`
+  width: 2px;
+  background-color: hsl(0deg 0% 0% / 6%);
+  margin: 0 17px 0 0;
+  @media (min-width: 1000px) {
+    margin: 0 35px 0 35px;
+  }
+`;
+
+const ReplyBox = styled.div`
+  display: flex;
+  alignitems: center;
+  flexdirection: column;
+  max-width: 48rem;
+`;
+
 const UserComments = () => {
   return data.comments.map((i) => (
-    <CommentDiv key={i.id}>
-      <div>
-        <HeaderComment>
-          <HeaderUser>
-            <Avatar src={i.user.image.png}></Avatar>
-            <UserName>{i.user.username}</UserName>
-            <DateComment>{i.createdAt}</DateComment>
-          </HeaderUser>
-        </HeaderComment>
+    <div key={i.id}>
+      <CommentDiv>
         <div>
-          <CommentContent>{i.content}</CommentContent>
+          <HeaderComment>
+            <HeaderUser>
+              <Avatar src={i.user.image.png}></Avatar>
+              <UserName>{i.user.username}</UserName>
+              <DateComment>{i.createdAt}</DateComment>
+            </HeaderUser>
+          </HeaderComment>
+          <div>
+            <CommentContent>{i.content}</CommentContent>
+          </div>
         </div>
-      </div>
 
-      <ButtonRateDiv>
-        <ButtonRate radiusLeft={true}>
-          <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" />
+        <ButtonRateDiv>
+          <ButtonRate radiusLeft={true}>
+            <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" />
+            </svg>
+          </ButtonRate>
+          <ScoreInButton>{i.score}</ScoreInButton>
+          <ButtonRate radiusLeft={false}>
+            <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" />
+            </svg>
+          </ButtonRate>
+        </ButtonRateDiv>
+        <ButtonReply>
+          <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
+            <path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" />
           </svg>
-        </ButtonRate>
-        <ScoreInButton>{i.score}</ScoreInButton>
-        <ButtonRate radiusLeft={false}>
-          <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" />
-          </svg>
-        </ButtonRate>
-      </ButtonRateDiv>
-      <ButtonReply>
-        <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z"
-            // fill="#5357B6"
-          />
-        </svg>
-        Reply
-      </ButtonReply>
-    </CommentDiv>
+          Reply
+        </ButtonReply>
+      </CommentDiv>
+      {i.replies.length > 0
+        ? i.replies.map((r) => (
+            <ReplyBox key={r.id}>
+              <div style={{ display: "flex" }}>
+                <LineReply />
+                <CommentDiv reply={true}>
+                  <div>
+                    <HeaderComment>
+                      <HeaderUser>
+                        <Avatar src={r.user.image.png}></Avatar>
+                        <UserName>{r.user.username}</UserName>
+                        <DateComment>{r.createdAt}</DateComment>
+                      </HeaderUser>
+                    </HeaderComment>
+                    <div>
+                      <CommentContent>
+                        <span>@{r.replyingTo} </span>
+                        {r.content}
+                      </CommentContent>
+                    </div>
+                  </div>
+
+                  <ButtonRateDiv>
+                    <ButtonRate radiusLeft={true}>
+                      <svg
+                        width="11"
+                        height="11"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" />
+                      </svg>
+                    </ButtonRate>
+                    <ScoreInButton>{r.score}</ScoreInButton>
+                    <ButtonRate radiusLeft={false}>
+                      <svg
+                        width="11"
+                        height="3"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z" />
+                      </svg>
+                    </ButtonRate>
+                  </ButtonRateDiv>
+                  <ButtonReply>
+                    <svg
+                      width="14"
+                      height="13"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z" />
+                    </svg>
+                    Reply
+                  </ButtonReply>
+                </CommentDiv>
+              </div>
+            </ReplyBox>
+          ))
+        : null}
+    </div>
   ));
 };
 
