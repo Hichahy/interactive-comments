@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const CommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
-  max-width: 48rem;
+  width: 100%;
   border-radius: 15px;
   display: flex;
   margin: 10px 0;
@@ -151,7 +151,6 @@ const ReplyBox = styled.div`
   display: flex;
   alignitems: center;
   flexdirection: column;
-  max-width: 48rem;
 `;
 
 const UserComments = ({ dataUsers }) => {
@@ -160,9 +159,9 @@ const UserComments = ({ dataUsers }) => {
   }
 
   return dataUsers.comments.map((i) => (
-    <div key={i.id}>
+    <div style={{ maxWidth: "48rem", width: "100%" }} key={i.id}>
       <CommentDiv>
-        <div>
+        <div style={{ width: "100%" }}>
           <HeaderComment>
             <HeaderUser>
               <Avatar src={i.user.image.png}></Avatar>

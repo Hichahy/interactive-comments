@@ -9,7 +9,7 @@ const AppContainer = styled.div`
   background: hsl(223, 19%, 93%);
   min-height: 100%;
   width: 100%;
-  padding: 20px 15px;
+  padding: 20px 20px;
   box-sizing: border-box;
   align-items: center;
   display: flex;
