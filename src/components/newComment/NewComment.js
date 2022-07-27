@@ -73,32 +73,37 @@ const Avatar = styled.img`
 `;
 
 const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
-  const [valueComment, setvalueComment] = useState("");
+  const [valueComment, setValueComment] = useState("");
 
   const handleTextArea = (e) => {
-    setvalueComment(e.target.value);
+    setValueComment(e.target.value);
   };
 
   const handleButtonSend = (e) => {
-    e.preventDefault();
-    dataUsers.comments.push({
-      id: Date.now(),
-      content: valueComment,
-      createdAt: "1 month ago",
-      score: 0,
-      user: {
-        image: {
-          png: data.currentUser.image.png,
-          webp: data.currentUser.image.webp,
-        },
-        username: data.currentUser.username,
-      },
-      replies: [],
+    const time = new Date().toDateString().split(" ");
+    setDataUsers((prev) => {
+      return {
+        ...prev,
+        comments: [
+          ...prev.comments,
+          {
+            id: Date.now(),
+            content: valueComment,
+            createdAt: `${time[1]} ${time[2]}`,
+            score: 0,
+            user: {
+              image: {
+                png: data.currentUser.image.png,
+                webp: data.currentUser.image.webp,
+              },
+              username: data.currentUser.username,
+            },
+            replies: [],
+          },
+        ],
+      };
     });
-    setDataUsers(dataUsers);
-    setvalueComment("");
-    setLoadData(true);
-    console.log(`dataUsers`, dataUsers.comments);
+    setValueComment("");
   };
 
   return (

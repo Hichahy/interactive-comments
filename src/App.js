@@ -18,21 +18,11 @@ const AppContainer = styled.div`
 
 const App = () => {
   const [dataUsers, setDataUsers] = useState(data);
-  const [loadData, setLoadData] = useState(false);
-
-  useEffect(() => {
-    setDataUsers(dataUsers);
-    setLoadData(false);
-  }, [loadData, dataUsers]);
 
   return (
     <AppContainer>
       <UserComments dataUsers={dataUsers} />
-      <NewComment
-        dataUsers={dataUsers}
-        setDataUsers={setDataUsers}
-        setLoadData={setLoadData}
-      />
+      <NewComment dataUsers={dataUsers} setDataUsers={setDataUsers} />
     </AppContainer>
   );
 };
