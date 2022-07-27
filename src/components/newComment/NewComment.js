@@ -4,7 +4,7 @@ import data from "../../data.json";
 
 const NewCommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
-  width: 48rem;
+  width: 100%;
   border-radius: 15px;
   display: flex;
   margin: 10px 0;
@@ -102,17 +102,19 @@ const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
   };
 
   return (
-    <NewCommentContainer>
-      <NewCommentDiv>
-        <TextAreaComment
-          onChange={handleTextArea}
-          value={valueComment}
-          placeholder="Add a comment..."
-        ></TextAreaComment>
-        <Avatar src={data.currentUser.image.png} />
-        <SendButton onClick={handleButtonSend}>SEND</SendButton>
-      </NewCommentDiv>
-    </NewCommentContainer>
+    <div style={{ maxWidth: "48rem", width: "100%" }}>
+      <NewCommentContainer>
+        <NewCommentDiv>
+          <TextAreaComment
+            onChange={handleTextArea}
+            value={valueComment}
+            placeholder="Add a comment..."
+          ></TextAreaComment>
+          <Avatar src={data.currentUser.image.png} />
+          <SendButton onClick={handleButtonSend}>SEND</SendButton>
+        </NewCommentDiv>
+      </NewCommentContainer>
+    </div>
   );
 };
 
