@@ -17,8 +17,12 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
-  const [dataUsers, setDataUsers] = useState(data);
-
+  const [dataUsers, setDataUsers] = useState(
+    JSON.parse(localStorage.getItem("data")) || data
+  );
+  
+  localStorage.setItem("data", JSON.stringify(dataUsers))
+ 
   return (
     <AppContainer>
       <UserComments dataUsers={dataUsers} />

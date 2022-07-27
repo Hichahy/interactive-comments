@@ -39,7 +39,11 @@ const SendButton = styled.button`
   font-weight: 400;
   outline: none;
   color: white;
+  cursor: pointer;
   background: hsl(238, 40%, 52%);
+  &:hover {
+    background: hsl(239, 57%, 85%);
+  }
 `;
 
 const TextAreaComment = styled.textarea`
@@ -79,7 +83,7 @@ const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
     setValueComment(e.target.value);
   };
 
-  const handleButtonSend = (e) => {
+  const handleButtonSend = () => {
     const time = new Date().toDateString().split(" ");
     setDataUsers((prev) => {
       return {
@@ -103,6 +107,7 @@ const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
         ],
       };
     });
+    localStorage.setItem("data", JSON.stringify(dataUsers));
     setValueComment("");
   };
 
