@@ -197,10 +197,10 @@ const UserComments = ({ dataUsers }) => {
       {i.replies.length > 0
         ? i.replies.map((r) => (
             <ReplyBox key={r.id}>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", width: "100%" }}>
                 <LineReply />
                 <CommentDiv reply={true}>
-                  <div>
+                  <div style={{width: "100%"}}>
                     <HeaderComment>
                       <HeaderUser>
                         <Avatar src={r.user.image.png}></Avatar>
