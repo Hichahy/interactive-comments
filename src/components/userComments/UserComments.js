@@ -132,7 +132,7 @@ const ButtonReply = styled.button`
   }
 
   @media (min-width: 515px) {
-    margin-top: 13px;
+    margin-top: 8px;
     align-items: center;
     height: max-content;
   }
@@ -151,6 +151,19 @@ const ReplyBox = styled.div`
   display: flex;
   alignitems: center;
   flexdirection: column;
+`;
+
+const CurrentUserPill = styled.label`
+  background: hsl(238, 40%, 52%);
+  color: white;
+  /* padding: 2px 10px; */
+  font-size: 13px;
+  height: 20px;
+  border-radius: 3px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const DeleteButton = styled.button`
@@ -175,7 +188,7 @@ const DeleteButton = styled.button`
   }
 
   @media (min-width: 515px) {
-    margin-top: 13px;
+    margin-top: 8px;
     align-items: center;
     height: max-content;
   }
@@ -185,7 +198,7 @@ const UserComments = ({ dataUsers }) => {
   if (!dataUsers) {
     return <p>loading...</p>;
   }
-  console.log(`object`, dataUsers.currentUser.username);
+
   return dataUsers.comments.map((i) => (
     <div style={{ maxWidth: "48rem", width: "100%" }} key={i.id}>
       <CommentDiv>
@@ -194,6 +207,9 @@ const UserComments = ({ dataUsers }) => {
             <HeaderUser>
               <Avatar src={i.user.image.png}></Avatar>
               <UserName>{i.user.username}</UserName>
+              {i.user.username !== dataUsers.currentUser.username ? null : (
+                <CurrentUserPill>you</CurrentUserPill>
+              )}
               <DateComment>{i.createdAt}</DateComment>
             </HeaderUser>
           </HeaderComment>
@@ -242,6 +258,10 @@ const UserComments = ({ dataUsers }) => {
                       <HeaderUser>
                         <Avatar src={r.user.image.png}></Avatar>
                         <UserName>{r.user.username}</UserName>
+                        {r.user.username !==
+                        dataUsers.currentUser.username ? null : (
+                          <CurrentUserPill>you</CurrentUserPill>
+                        )}
                         <DateComment>{r.createdAt}</DateComment>
                       </HeaderUser>
                     </HeaderComment>
