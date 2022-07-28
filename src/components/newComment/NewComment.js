@@ -76,7 +76,7 @@ const Avatar = styled.img`
   }
 `;
 
-const NewComment = ({ dataUsers, setDataUsers, setLoadData }) => {
+const NewComment = ({ dataUsers, setDataUsers }) => {
   const [valueComment, setValueComment] = useState("");
 
   const handleTextArea = (e) => {
