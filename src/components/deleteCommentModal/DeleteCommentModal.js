@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReactDOM from "react-dom";
 import { ParagraphContent } from "../userComments/UserComments";
 
 const ButtonModal = styled.button`
@@ -40,6 +41,8 @@ const OverlayModal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
+  -webkit-animation: fadein 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fadein 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 `;
 
 const ModalTitle = styled.h1`
@@ -70,10 +73,11 @@ const Modal = styled.div`
   }
 `;
 
-const DeleteCommentModal = () => {
-  return (
+const DeleteCommentModal = ({ openModal, setOpenModal }) => {
+  if (!openModal) return null;
+  return ReactDOM.createPortal(
     <>
-      <OverlayModal />
+      <OverlayModal onClick={() => setOpenModal(false)} />
       <Modal>
         <ModalTitle>Delete comment</ModalTitle>
         <ParagraphContent>
@@ -87,11 +91,17 @@ const DeleteCommentModal = () => {
             width: "100%",
           }}
         >
-          <ButtonModal style={{ marginRight: "11px" }}>NO, CANCEL</ButtonModal>
+          <ButtonModal
+            onClick={() => setOpenModal(false)}
+            style={{ marginRight: "11px" }}
+          >
+            NO, CANCEL
+          </ButtonModal>
           <ButtonModal danger={true}>YES, DELETE</ButtonModal>
         </div>
       </Modal>
-    </>
+    </>,
+    document.getElementById("portal")
   );
 };
 

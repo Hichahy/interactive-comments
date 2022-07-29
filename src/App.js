@@ -3,7 +3,6 @@ import "./app.scss";
 import styled from "styled-components";
 import UserComments from "./components/userComments/UserComments";
 import NewComment from "./components/newComment/NewComment";
-import DeleteCommentModal from "./components/deleteCommentModal/DeleteCommentModal";
 import data from "./data.json";
 
 const AppContainer = styled.div`
@@ -28,7 +27,6 @@ const App = () => {
     <AppContainer>
       <UserComments dataUsers={dataUsers} />
       <NewComment dataUsers={dataUsers} setDataUsers={setDataUsers} />
-      <DeleteCommentModal />
     </AppContainer>
   );
 };
