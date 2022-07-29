@@ -73,7 +73,24 @@ const Modal = styled.div`
   }
 `;
 
-const DeleteCommentModal = ({ openModal, setOpenModal }) => {
+const DeleteCommentModal = ({
+  openModal,
+  setOpenModal,
+  dataUsers,
+  setDataUsers,
+  delItemId,
+}) => {
+  const handleDeleteComment = (id) => {
+    setDataUsers((prevData) => {
+      return {
+        ...prevData,
+        comments: dataUsers.comments.filter((i) => +id !== i.id),
+      };
+    });
+    localStorage.setItem("data", JSON.stringify(dataUsers));
+    setOpenModal(false);
+  };
+
   if (!openModal) return null;
   return ReactDOM.createPortal(
     <>
@@ -97,7 +114,12 @@ const DeleteCommentModal = ({ openModal, setOpenModal }) => {
           >
             NO, CANCEL
           </ButtonModal>
-          <ButtonModal danger={true}>YES, DELETE</ButtonModal>
+          <ButtonModal
+            onClick={() => handleDeleteComment(delItemId)}
+            danger={true}
+          >
+            YES, DELETE
+          </ButtonModal>
         </div>
       </Modal>
     </>,

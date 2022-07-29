@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <AppContainer>
-      <UserComments dataUsers={dataUsers} />
+      <UserComments dataUsers={dataUsers} setDataUsers={setDataUsers} />
       <NewComment dataUsers={dataUsers} setDataUsers={setDataUsers} />
     </AppContainer>
   );

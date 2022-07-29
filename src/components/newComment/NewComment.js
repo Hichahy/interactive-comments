@@ -91,7 +91,7 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
         comments: [
           ...prev.comments,
           {
-            id: Date.now(),
+            id: Math.floor(Math.random() * (1000000 - 10)) + 10,
             content: valueComment,
             createdAt: `${time[1]} ${time[2]}`,
             score: 0,
