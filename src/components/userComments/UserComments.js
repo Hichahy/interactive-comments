@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const CommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
   width: 100%;
@@ -51,7 +52,7 @@ const DateComment = styled.p`
   color: hsl(211, 10%, 45%);
 `;
 
-const CommentContent = styled.p`
+export const ParagraphContent = styled.p`
   color: hsl(211, 10%, 45%);
   line-height: 25px;
   margin-bottom: 25px;
@@ -214,7 +215,7 @@ const UserComments = ({ dataUsers }) => {
             </HeaderUser>
           </HeaderComment>
           <div>
-            <CommentContent>{i.content}</CommentContent>
+            <ParagraphContent>{i.content}</ParagraphContent>
           </div>
         </div>
 
@@ -266,10 +267,10 @@ const UserComments = ({ dataUsers }) => {
                       </HeaderUser>
                     </HeaderComment>
                     <div>
-                      <CommentContent>
+                      <ParagraphContent>
                         <span>@{r.replyingTo} </span>
                         {r.content}
-                      </CommentContent>
+                      </ParagraphContent>
                     </div>
                   </div>
 
