@@ -198,11 +198,18 @@ const DeleteButton = styled.button`
 const UserComments = ({ dataUsers, setDataUsers }) => {
   const [openModal, setOpenModal] = useState(false);
   const [delItemId, setDelItemId] = useState(null);
+  const [delItemType, setDelItemType] = useState(null);
+  const [delReplieIndex, setDelReplieIndex] = useState(null);
 
-  const handleDeleteModal = (e) => {
-    setDelItemId(e.target.id);
+  const handleDeleteModal = (id, type, index) => {
+    setDelItemId(id);
     setOpenModal(true);
+    setDelItemType(type);
+    setDelReplieIndex(index);
   };
+  console.log(`id`, delItemId);
+  console.log(`type`, delItemType, typeof(delItemType));
+  console.log(`index`, delReplieIndex);
 
   if (!dataUsers) {
     return <p>loading...</p>;
@@ -210,7 +217,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
 
   return (
     <>
-      {dataUsers.comments.map((i) => (
+      {dataUsers.comments.map((i, index) => (
         <div style={{ maxWidth: "48rem", width: "100%" }} key={i.id}>
           <CommentDiv>
             <div style={{ width: "100%" }}>
@@ -250,7 +257,9 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                 Reply
               </ButtonReply>
             ) : (
-              <DeleteButton id={i.id} onClick={handleDeleteModal}>
+              <DeleteButton
+                onClick={() => handleDeleteModal(i.id, "comment", index)}
+              >
                 <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
                 </svg>
@@ -259,7 +268,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
             )}
           </CommentDiv>
           {i.replies.length > 0
-            ? i.replies.map((r) => (
+            ? i.replies.map((r, index) => (
                 <ReplyBox key={r.id}>
                   <div style={{ display: "flex", width: "100%" }}>
                     <LineReply />
@@ -317,7 +326,11 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                           Reply
                         </ButtonReply>
                       ) : (
-                        <DeleteButton onClick={() => setOpenModal(true)}>
+                        <DeleteButton
+                          onClick={() =>
+                            handleDeleteModal(r.id, "reply", index)
+                          }
+                        >
                           <svg
                             width="12"
                             height="14"
@@ -341,6 +354,8 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
         dataUsers={dataUsers}
         setDataUsers={setDataUsers}
         delItemId={delItemId}
+        delReplieIndex={delReplieIndex}
+        delItemType={delItemType}
       />
     </>
   );
