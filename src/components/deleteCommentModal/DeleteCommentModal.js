@@ -79,33 +79,24 @@ const DeleteCommentModal = ({
   dataUsers,
   setDataUsers,
   delItemId,
-  delItemType,
-  delReplieIndex,
 }) => {
   const handleDeleteComment = (id) => {
-    const delReply = dataUsers.comments[delReplieIndex];
-    if (delItemType === "comment") {
-      setDataUsers((prevData) => {
-        return {
-          ...prevData,
-          comments: dataUsers.comments.filter((i) => +id !== i.id),
-        };
+    const filterComment = dataUsers.comments
+      .filter((item) => {
+        return item.id !== +id;
+      })
+      .filter((i) => {
+        const replies = i.replies.filter((reply) => {
+          return reply.id !== +id;
+        });
+        return (i.replies = replies);
       });
-    } else if (delItemType === "reply") {
-      // setDataUsers((prevData) => {
-      //   return {
-      //     ...prevData,
-      //     comments: dataUsers.comments[delReplieIndex].replies.filter(
-      //       (i) => +id !== i.id
-      //     ),
-      //   };
-      // });
-      setDataUsers((prevData) => ({
+    setDataUsers((prevData) => {
+      return {
         ...prevData,
-        comments: dataUsers.comments,
-        [delReplieIndex]: dataUsers.comments[delReplieIndex],
-      }));
-    }
+        comments: filterComment,
+      };
+    });
     localStorage.setItem("data", JSON.stringify(dataUsers));
     setOpenModal(false);
   };
