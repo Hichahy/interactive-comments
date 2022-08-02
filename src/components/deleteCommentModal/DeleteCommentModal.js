@@ -82,22 +82,14 @@ const DeleteCommentModal = ({
 }) => {
   const handleDeleteComment = (id) => {
     const filterComment = dataUsers.comments
-      .filter((item) => {
-        return item.id !== +id;
-      })
-      .filter((i) => {
-        const replies = i.replies.filter((reply) => {
-          return reply.id !== +id;
-        });
-        return (i.replies = replies);
-      });
-    setDataUsers((prevData) => {
-      return {
-        ...prevData,
-        comments: filterComment,
-      };
+      .filter((item) => item.id !== +id)
+      .filter(
+        (i) => (i.replies = i.replies.filter((reply) => reply.id !== +id))
+      );
+    setDataUsers({
+      ...dataUsers,
+      comments: filterComment,
     });
-    localStorage.setItem("data", JSON.stringify(dataUsers));
     setOpenModal(false);
   };
 

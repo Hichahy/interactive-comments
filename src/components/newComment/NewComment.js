@@ -85,29 +85,26 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
 
   const handleButtonSend = () => {
     const time = new Date().toDateString().split(" ");
-    setDataUsers((prev) => {
-      return {
-        ...prev,
-        comments: [
-          ...prev.comments,
-          {
-            id: Math.floor(Math.random() * (1000000 - 10)) + 10,
-            content: valueComment,
-            createdAt: `${time[1]} ${time[2]}`,
-            score: 0,
-            user: {
-              image: {
-                png: data.currentUser.image.png,
-                webp: data.currentUser.image.webp,
-              },
-              username: data.currentUser.username,
+    setDataUsers({
+      ...dataUsers,
+      comments: [
+        ...dataUsers.comments,
+        {
+          id: Math.floor(Math.random() * (1000000 - 10)) + 10,
+          content: valueComment,
+          createdAt: `${time[1]} ${time[2]}`,
+          score: 0,
+          user: {
+            image: {
+              png: data.currentUser.image.png,
+              webp: data.currentUser.image.webp,
             },
-            replies: [],
+            username: data.currentUser.username,
           },
-        ],
-      };
+          replies: [],
+        },
+      ],
     });
-    localStorage.setItem("data", JSON.stringify(dataUsers));
     setValueComment("");
   };
 
