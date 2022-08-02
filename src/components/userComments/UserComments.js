@@ -204,13 +204,39 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
     setOpenModal(true);
   };
 
+  const handleAddRateComment = (id) => {
+    setDataUsers({
+      ...dataUsers,
+      comments: dataUsers.comments.map((comment) =>
+        comment.id === +id && comment.rateIsAdd === false
+          ? {
+              ...comment,
+              score: comment.score + 1,
+              rateIsAdd: true, //add rate, but only once time
+            }
+          : {
+              ...comment,
+              replies: comment.replies.map((reply) =>
+                reply.id === +id && reply.rateIsAdd === false
+                  ? {
+                      ...reply,
+                      score: reply.score + 1,
+                      rateIsAdd: true,
+                    }
+                  : reply
+              ),
+            }
+      ),
+    });
+  };
+
   if (!dataUsers) {
     return <p>loading...</p>;
   }
 
   return (
     <>
-      {dataUsers.comments.map((i, index) => (
+      {dataUsers.comments.map((i) => (
         <div style={{ maxWidth: "48rem", width: "100%" }} key={i.id}>
           <CommentDiv>
             <div style={{ width: "100%" }}>
@@ -230,7 +256,10 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
             </div>
 
             <ButtonRateDiv>
-              <ButtonRate radiusLeft={true}>
+              <ButtonRate
+                onClick={() => handleAddRateComment(i.id)}
+                radiusLeft={true}
+              >
                 <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z" />
                 </svg>
@@ -250,9 +279,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                 Reply
               </ButtonReply>
             ) : (
-              <DeleteButton
-                onClick={() => handleDeleteModal(i.id)}
-              >
+              <DeleteButton onClick={() => handleDeleteModal(i.id)}>
                 <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
                 </svg>
@@ -261,7 +288,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
             )}
           </CommentDiv>
           {i.replies.length > 0
-            ? i.replies.map((r, index) => (
+            ? i.replies.map((r) => (
                 <ReplyBox key={r.id}>
                   <div style={{ display: "flex", width: "100%" }}>
                     <LineReply />
@@ -287,7 +314,10 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                       </div>
 
                       <ButtonRateDiv>
-                        <ButtonRate radiusLeft={true}>
+                        <ButtonRate
+                          onClick={() => handleAddRateComment(r.id)}
+                          radiusLeft={true}
+                        >
                           <svg
                             width="11"
                             height="11"
@@ -319,11 +349,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                           Reply
                         </ButtonReply>
                       ) : (
-                        <DeleteButton
-                          onClick={() =>
-                            handleDeleteModal(r.id)
-                          }
-                        >
+                        <DeleteButton onClick={() => handleDeleteModal(r.id)}>
                           <svg
                             width="12"
                             height="14"
