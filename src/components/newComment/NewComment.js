@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import data from "../../data.json";
 
-const NewCommentDiv = styled.div`
+export const NewCommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
   width: 100%;
   border-radius: 15px;
@@ -24,20 +24,20 @@ const NewCommentDiv = styled.div`
   }
 `;
 
-const NewCommentContainer = styled.div`
+export const NewCommentContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
 
-const SendButton = styled.button`
+export const SendButton = styled.button`
   min-width: 100px;
   height: 40px;
   border-radius: 8px;
   border: none;
   font-size: 16px;
   font-weight: 400;
-  outline: none;
+  outline-color: transparent;
   color: white;
   cursor: pointer;
   background: hsl(238, 40%, 52%);
@@ -46,7 +46,7 @@ const SendButton = styled.button`
   }
 `;
 
-const TextAreaComment = styled.textarea`
+export const TextAreaComment = styled.textarea`
   width: 100%;
   border: 1px solid #80808038;
   border-radius: 10px;
@@ -55,7 +55,7 @@ const TextAreaComment = styled.textarea`
   padding: 10px 20px;
   font-family: "Nunito Sans", sans-serif;
   resize: none;
-  outline: none;
+  outline: 1px solid #80808038;
   font-size: 16px;
   color: hsl(211, 10%, 45%);
   ::placeholder {
@@ -67,7 +67,7 @@ const TextAreaComment = styled.textarea`
   }
 `;
 
-const Avatar = styled.img`
+export const Avatar = styled.img`
   width: 35px;
   height: 35px;
   @media (min-width: 515px) {
@@ -118,7 +118,7 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
             placeholder="Add a comment..."
           ></TextAreaComment>
           <Avatar src={data.currentUser.image.png} />
-          <SendButton onClick={handleButtonSend}>SEND</SendButton>
+          <SendButton onClick={handleButtonSend}>Send</SendButton>
         </NewCommentDiv>
       </NewCommentContainer>
     </div>
