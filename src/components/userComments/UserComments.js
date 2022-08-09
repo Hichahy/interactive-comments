@@ -143,8 +143,8 @@ const ButtonReply = styled.button`
 `;
 
 const LineReply = styled.div`
-  width: 2px;
-  background-color: hsl(0deg 0% 0% / 6%);
+  width: 1px;
+  background-color: hsl(0deg 0% 0% / 8%);
   margin: 0 17px 0 0;
   @media (min-width: 1000px) {
     margin: 0 35px 0 35px;
@@ -271,7 +271,12 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
           : {
               ...c,
               replies: c.replies.map((r) =>
-                r.id === id ? { ...r, reply: reply ? false : true } : r
+                r.id === id
+                  ? {
+                      ...r,
+                      reply: reply ? false : true,
+                    }
+                  : r
               ),
             }
       ),
@@ -344,13 +349,19 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
               </DeleteButton>
             )}
           </CommentDiv>
-          {i.reply ? <NewReply /> : null}
+          {i.reply ? (
+            <NewReply
+              dataUsers={dataUsers}
+              setDataUsers={setDataUsers}
+              id={i.id}
+            />
+          ) : null}
           {i.replies.length > 0
             ? i.replies.map((r) => (
                 <ReplyBox key={r.id}>
                   <div style={{ display: "flex", width: "100%" }}>
                     <LineReply />
-                    <div>
+                    <div style={{ width: "100%" }}>
                       <CommentDiv reply={true}>
                         <div style={{ width: "100%" }}>
                           <HeaderComment>
@@ -403,7 +414,9 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                         </ButtonRateDiv>
                         {r.user.username !== dataUsers.currentUser.username ? (
                           <ButtonReply
-                            onClick={() => handleOpenReply(r.id, r.reply)}
+                            onClick={() =>
+                              handleOpenReply(r.id, r.reply)
+                            }
                           >
                             <svg
                               width="14"
@@ -427,7 +440,14 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                           </DeleteButton>
                         )}
                       </CommentDiv>
-                      {r.reply ? <NewReply /> : null}
+                      {r.reply ? (
+                        <NewReply
+                          dataUsers={dataUsers}
+                          setDataUsers={setDataUsers}
+                          id={i.id}
+                          replyId={r.id}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </ReplyBox>
