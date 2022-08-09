@@ -332,7 +332,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
             {i.user.username !== dataUsers.currentUser.username ? (
               <ButtonReply
                 onClick={() => {
-                  handleOpenReply(i.id, i.reply, i.user.username);
+                  handleOpenReply(i.id, i.reply);
                 }}
               >
                 <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
@@ -415,7 +415,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                         {r.user.username !== dataUsers.currentUser.username ? (
                           <ButtonReply
                             onClick={() =>
-                              handleOpenReply(r.id, r.reply, r.user.username)
+                              handleOpenReply(r.id, r.reply)
                             }
                           >
                             <svg
