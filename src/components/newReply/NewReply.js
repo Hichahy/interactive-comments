@@ -15,7 +15,7 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
     setValueReply(e.target.value);
   };
 
-  const handleButtonSend = (id, replyId) => {
+  const handleButtonSend = () => {
     const time = new Date().toDateString().split(" ");
     setDataUsers({
       ...dataUsers,
@@ -24,7 +24,14 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
           ? {
               ...c,
               replies: [
-                ...c.replies,
+                ...c.replies.map((r) =>
+                  r.id === +replyId
+                    ? {
+                        ...r,
+                        reply: false,
+                      }
+                    : r
+                ),
                 {
                   id: Math.floor(Math.random() * (1000000 - 10)) + 10,
                   content: valueReply,
@@ -42,11 +49,11 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
                   },
                 },
               ],
+              reply: false,
             }
           : c
       ),
     });
-    console.log(id);
     setValueReply("");
   };
 
@@ -60,9 +67,7 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
             placeholder="Add a comment..."
           ></TextAreaComment>
           <Avatar src={data.currentUser.image.png} />
-          <SendButton onClick={() => handleButtonSend(id, replyId)}>
-            Reply
-          </SendButton>
+          <SendButton onClick={() => handleButtonSend()}>Reply</SendButton>
         </NewCommentDiv>
       </NewCommentContainer>
     </div>

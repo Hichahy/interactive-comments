@@ -22,6 +22,8 @@ export const NewCommentDiv = styled.div`
   }
   @media (min-width: 515px) {
   }
+  -webkit-animation: fadein 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fadein 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 `;
 
 export const NewCommentContainer = styled.div`
