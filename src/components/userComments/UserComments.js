@@ -13,8 +13,9 @@ const CommentDiv = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 15px;
+  position: relative;
   box-sizing: border-box;
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
     flex-direcion: row;
     flex-wrap: nowrap;
     padding: 20px;
@@ -61,14 +62,14 @@ export const ParagraphContent = styled.p`
     color: hsl(238, 40%, 52%);
     font-weight: 700;
   }
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
     margin-bottom: 0;
   }
 `;
 
 const ButtonRateDiv = styled.div`
   display: flex;
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
     flex-direction: column;
     order: -1;
     margin-right: 20px;
@@ -89,7 +90,7 @@ const ButtonRate = styled.button`
   &:hover {
     fill: hsl(238, 40%, 52%);
   }
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
     ${(props) =>
       props.radiusLeft
         ? "border-radius: 10px 10px 0 0"
@@ -126,6 +127,9 @@ const ButtonReply = styled.button`
   color: hsl(238, 40%, 52%);
   fill: hsl(238, 40%, 52%);
   cursor: pointer;
+  position: absolute;
+  right: 20px;
+
   svg {
     margin-right: 10px;
   }
@@ -135,10 +139,13 @@ const ButtonReply = styled.button`
     fill: hsl(239, 57%, 85%);
   }
 
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
     margin-top: 8px;
     align-items: center;
     height: max-content;
+  }
+  @media (max-width: 614px) {
+    bottom: 25px;
   }
 `;
 
@@ -155,6 +162,15 @@ const ReplyBox = styled.div`
   display: flex;
   alignitems: center;
   flex-direction: column;
+`;
+const UserBoxButtons = styled.div`
+  display: flex;
+  height: fit-content;
+  position: absolute;
+  right: 20px;
+  @media (max-width: 614px) {
+    bottom: 25px;
+  }
 `;
 
 const CurrentUserPill = styled.label`
@@ -173,7 +189,6 @@ const CurrentUserPill = styled.label`
 const DeleteButton = styled.button`
   border: none;
   background: transparent;
-  width: 75px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -181,6 +196,7 @@ const DeleteButton = styled.button`
   font-weight: 700;
   color: hsl(358, 79%, 66%);
   fill: hsl(358, 79%, 66%);
+  margin-right: 10px;
   cursor: pointer;
   svg {
     margin-right: 10px;
@@ -191,7 +207,33 @@ const DeleteButton = styled.button`
     fill: hsl(357, 100%, 86%);
   }
 
-  @media (min-width: 515px) {
+  @media (min-width: 615px) {
+    margin-top: 8px;
+    align-items: center;
+    height: max-content;
+  }
+`;
+const EditButton = styled.button`
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 700;
+  color: hsl(238, 40%, 52%);
+  fill: hsl(238, 40%, 52%);
+  cursor: pointer;
+  svg {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    color: hsl(239, 57%, 85%);
+    fill: hsl(239, 57%, 85%);
+  }
+
+  @media (min-width: 615px) {
     margin-top: 8px;
     align-items: center;
     height: max-content;
@@ -341,12 +383,28 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                 Reply
               </ButtonReply>
             ) : (
-              <DeleteButton onClick={() => handleDeleteModal(i.id)}>
-                <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
-                </svg>
-                Delete
-              </DeleteButton>
+              <UserBoxButtons>
+                <DeleteButton onClick={() => handleDeleteModal(i.id)}>
+                  <svg
+                    width="12"
+                    height="14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
+                  </svg>
+                  Delete
+                </DeleteButton>
+                <EditButton>
+                  <svg
+                    width="14"
+                    height="14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" />
+                  </svg>
+                  Edit
+                </EditButton>
+              </UserBoxButtons>
             )}
           </CommentDiv>
           {i.reply ? (
@@ -414,9 +472,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                         </ButtonRateDiv>
                         {r.user.username !== dataUsers.currentUser.username ? (
                           <ButtonReply
-                            onClick={() =>
-                              handleOpenReply(r.id, r.reply)
-                            }
+                            onClick={() => handleOpenReply(r.id, r.reply)}
                           >
                             <svg
                               width="14"
@@ -428,16 +484,30 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                             Reply
                           </ButtonReply>
                         ) : (
-                          <DeleteButton onClick={() => handleDeleteModal(r.id)}>
-                            <svg
-                              width="12"
-                              height="14"
-                              xmlns="http://www.w3.org/2000/svg"
+                          <UserBoxButtons>
+                            <DeleteButton
+                              onClick={() => handleDeleteModal(r.id)}
                             >
-                              <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
-                            </svg>
-                            Delete
-                          </DeleteButton>
+                              <svg
+                                width="12"
+                                height="14"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" />
+                              </svg>
+                              Delete
+                            </DeleteButton>
+                            <EditButton>
+                              <svg
+                                width="14"
+                                height="14"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" />
+                              </svg>
+                              Edit
+                            </EditButton>
+                          </UserBoxButtons>
                         )}
                       </CommentDiv>
                       {r.reply ? (
