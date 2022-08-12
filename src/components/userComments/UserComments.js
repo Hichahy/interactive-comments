@@ -118,7 +118,6 @@ const ScoreInButton = styled.label`
 const ButtonReply = styled.button`
   border: none;
   background: transparent;
-  width: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -211,8 +210,16 @@ const DeleteButton = styled.button`
     margin-top: 8px;
     align-items: center;
     height: max-content;
+    margin-right: 20px;
   }
 `;
+
+const EditBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+
 const EditButton = styled.button`
   border: none;
   background: transparent;
@@ -240,9 +247,51 @@ const EditButton = styled.button`
   }
 `;
 
+const TextAreaEdit = styled.textarea`
+  width: 100%;
+  border: 1px solid #80808038;
+  border-radius: 10px;
+  height: 80px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  resize: none;
+  outline: 1px solid #80808038;
+  font-size: 16px;
+  color: hsl(211, 10%, 45%);
+  margin-bottom: 20px;
+  ::placeholder {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 16px;
+  }
+  :focus {
+    border: 1px solid hsl(238, 40%, 52%);
+  }
+`;
+
+const UpdateButton = styled.button`
+  min-width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  outline-color: transparent;
+  color: white;
+  cursor: pointer;
+  background: hsl(238, 40%, 52%);
+  &:hover {
+    background: hsl(239, 57%, 85%);
+  }
+  @media (max-width: 615px) {
+    margin-bottom: 15px;
+  }
+`;
+
 const UserComments = ({ dataUsers, setDataUsers }) => {
   const [openModal, setOpenModal] = useState(false);
   const [delItemId, setDelItemId] = useState(null);
+  const [editValue, setEditValue] = useState(null);
 
   const handleDeleteModal = (id) => {
     setDelItemId(id);
@@ -325,6 +374,36 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
     });
   };
 
+  const handleOpenEdit = (id, edit, content) => {
+    setDataUsers({
+      ...dataUsers,
+      comments: dataUsers.comments.map((c) =>
+        c.id === +id
+          ? {
+              ...c,
+              edit: edit ? false : true,
+            }
+          : {
+              ...c,
+              replies: c.replies.map((r) =>
+                r.id === id
+                  ? {
+                      ...r,
+                      edit: edit ? false : true,
+                    }
+                  : r
+              ),
+            }
+      ),
+    });
+    setEditValue(content);
+  };
+
+  const handleEditValue = (e) => {
+    setEditValue(e.target.value);
+  };
+  console.log(editValue);
+
   if (!dataUsers) {
     return <p>loading...</p>;
   }
@@ -346,7 +425,17 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                 </HeaderUser>
               </HeaderComment>
               <div>
-                <ParagraphContent>{i.content}</ParagraphContent>
+                {!i.edit ? (
+                  <ParagraphContent>{i.content}</ParagraphContent>
+                ) : (
+                  <EditBox>
+                    <TextAreaEdit
+                      onChange={handleEditValue}
+                      value={editValue}
+                    ></TextAreaEdit>
+                    <UpdateButton>Update</UpdateButton>
+                  </EditBox>
+                )}
               </div>
             </div>
 
@@ -394,7 +483,9 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                   </svg>
                   Delete
                 </DeleteButton>
-                <EditButton>
+                <EditButton
+                  onClick={() => handleOpenEdit(i.id, i.edit, i.content)}
+                >
                   <svg
                     width="14"
                     height="14"
@@ -434,10 +525,20 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                             </HeaderUser>
                           </HeaderComment>
                           <div>
-                            <ParagraphContent>
-                              <span>@{r.replyingTo} </span>
-                              {r.content}
-                            </ParagraphContent>
+                            {!r.edit ? (
+                              <ParagraphContent>
+                                <span>@{r.replyingTo} </span>
+                                {r.content}
+                              </ParagraphContent>
+                            ) : (
+                              <EditBox>
+                                <TextAreaEdit
+                                  onChange={handleEditValue}
+                                  value={editValue}
+                                ></TextAreaEdit>
+                                <UpdateButton>Update</UpdateButton>
+                              </EditBox>
+                            )}
                           </div>
                         </div>
 
@@ -497,7 +598,11 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                               </svg>
                               Delete
                             </DeleteButton>
-                            <EditButton>
+                            <EditButton
+                              onClick={() =>
+                                handleOpenEdit(r.id, r.edit, r.content)
+                              }
+                            >
                               <svg
                                 width="14"
                                 height="14"

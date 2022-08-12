@@ -64,6 +64,9 @@ export const TextAreaComment = styled.textarea`
     font-family: "Nunito Sans", sans-serif;
     font-size: 16px;
   }
+  :focus {
+    border: 1px solid hsl(238, 40%, 52%);
+  }
   @media (min-width: 515px) {
     margin-right: 20px;
   }
@@ -95,6 +98,7 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
           id: Math.floor(Math.random() * (1000000 - 10)) + 10,
           content: valueComment,
           createdAt: `${time[1]} ${time[2]}`,
+          edit: false,
           score: 0,
           user: {
             image: {
