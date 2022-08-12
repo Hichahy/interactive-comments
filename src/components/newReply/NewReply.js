@@ -39,6 +39,7 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
                     ? c.user.username
                     : c.replies.map((r) => r.id === replyId && r.user.username),
                   createdAt: `${time[1]} ${time[2]}`,
+                  edit: false,
                   score: 0,
                   user: {
                     image: {
