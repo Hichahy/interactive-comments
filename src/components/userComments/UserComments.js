@@ -404,6 +404,32 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
   };
   console.log(editValue);
 
+  const handleUpadateComment = (id) => {
+    setDataUsers({
+      ...dataUsers,
+      comments: dataUsers.comments.map((c) =>
+        c.id === +id
+          ? {
+              ...c,
+              content: editValue,
+              edit: false,
+            }
+          : {
+              ...c,
+              replies: c.replies.map((r) =>
+                r.id === id
+                  ? {
+                      ...r,
+                      content: editValue,
+                      edit: false,
+                    }
+                  : r
+              ),
+            }
+      ),
+    });
+  };
+
   if (!dataUsers) {
     return <p>loading...</p>;
   }
@@ -433,7 +459,9 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                       onChange={handleEditValue}
                       value={editValue}
                     ></TextAreaEdit>
-                    <UpdateButton>Update</UpdateButton>
+                    <UpdateButton onClick={() => handleUpadateComment(i.id)}>
+                      Update
+                    </UpdateButton>
                   </EditBox>
                 )}
               </div>
@@ -536,7 +564,11 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                                   onChange={handleEditValue}
                                   value={editValue}
                                 ></TextAreaEdit>
-                                <UpdateButton>Update</UpdateButton>
+                                <UpdateButton
+                                  onClick={() => handleUpadateComment(r.id)}
+                                >
+                                  Update
+                                </UpdateButton>
                               </EditBox>
                             )}
                           </div>
