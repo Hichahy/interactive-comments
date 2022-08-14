@@ -291,7 +291,7 @@ const UpdateButton = styled.button`
 const UserComments = ({ dataUsers, setDataUsers }) => {
   const [openModal, setOpenModal] = useState(false);
   const [delItemId, setDelItemId] = useState(null);
-  const [editValue, setEditValue] = useState(null);
+  const [editValue, setEditValue] = useState("");
 
   const handleDeleteModal = (id) => {
     setDelItemId(id);
@@ -374,7 +374,17 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
     });
   };
 
+  const handleCloseEdit = () => {
+    setDataUsers({
+      ...dataUsers,
+      comments: dataUsers.comments.map(
+        (c) => ((c.edit = false), c.replies.map((r) => (r.edit = false)))
+      ),
+    });
+  };
+
   const handleOpenEdit = (id, edit, content) => {
+    handleCloseEdit();
     setDataUsers({
       ...dataUsers,
       comments: dataUsers.comments.map((c) =>
