@@ -6,7 +6,7 @@ import NewReply from "../newReply/NewReply";
 import { timeSince } from "../../utils/time";
 
 const CommentDiv = styled.div`
-  background-color: hsl(228, 33%, 97%);
+  background-color: hsl(228deg, 33%, 97%);
   width: 100%;
   border-radius: 15px;
   display: flex;
@@ -17,8 +17,8 @@ const CommentDiv = styled.div`
   padding: 15px;
   position: relative;
   box-sizing: border-box;
+
   @media (min-width: 615px) {
-    flex-direcion: row;
     flex-wrap: nowrap;
     padding: 20px;
   }
@@ -53,15 +53,16 @@ const UserName = styled.h1`
 const DateComment = styled.p`
   font-size: 16px;
   font-weight: 400;
-  color: hsl(211, 10%, 45%);
+  color: hsl(211deg, 10%, 45%);
 `;
 
 export const ParagraphContent = styled.p`
-  color: hsl(211, 10%, 45%);
+  color: hsl(211deg, 10%, 45%);
   line-height: 25px;
   margin-bottom: 25px;
+
   span {
-    color: hsl(238, 40%, 52%);
+    color: hsl(238deg, 40%, 52%);
     font-weight: 700;
   }
   @media (min-width: 615px) {
@@ -71,6 +72,7 @@ export const ParagraphContent = styled.p`
 
 const ButtonRateDiv = styled.div`
   display: flex;
+
   @media (min-width: 615px) {
     flex-direction: column;
     order: -1;
@@ -85,19 +87,21 @@ const ButtonRate = styled.button`
   justify-content: center;
   height: 40px;
   width: 40px;
-  background-color: hsl(223, 19%, 93%);
+  background-color: hsl(223deg, 19%, 93%);
   ${(props) =>
     props.blocked ? "fill: hsl(239, 57%, 85%);" : "fill:  hsl(238, 40%, 52%);"};
 
   &:hover {
-    fill: hsl(238, 40%, 52%);
+    fill: hsl(238deg, 40%, 52%);
   }
+
   @media (min-width: 615px) {
     ${(props) =>
       props.radiusLeft
         ? "border-radius: 10px 10px 0 0"
         : "border-radius: 0 0 10px 10px"}
   }
+
   cursor: pointer;
   ${(props) =>
     props.radiusLeft
@@ -110,11 +114,11 @@ const ScoreInButton = styled.label`
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: hsl(238, 40%, 52%);
+  color: hsl(238deg, 40%, 52%);
   height: 40px;
   width: 40px;
   font-size: 18px;
-  background-color: hsl(223, 19%, 93%);
+  background-color: hsl(223deg, 19%, 93%);
 `;
 
 const ButtonReply = styled.button`
@@ -125,8 +129,8 @@ const ButtonReply = styled.button`
   justify-content: space-between;
   font-size: 16px;
   font-weight: 700;
-  color: hsl(238, 40%, 52%);
-  fill: hsl(238, 40%, 52%);
+  color: hsl(238deg, 40%, 52%);
+  fill: hsl(238deg, 40%, 52%);
   cursor: pointer;
   position: absolute;
   right: 20px;
@@ -136,8 +140,8 @@ const ButtonReply = styled.button`
   }
 
   &:hover {
-    color: hsl(239, 57%, 85%);
-    fill: hsl(239, 57%, 85%);
+    color: hsl(239deg, 57%, 85%);
+    fill: hsl(239deg, 57%, 85%);
   }
 
   @media (min-width: 615px) {
@@ -145,6 +149,7 @@ const ButtonReply = styled.button`
     align-items: center;
     height: max-content;
   }
+
   @media (max-width: 614px) {
     bottom: 25px;
   }
@@ -154,14 +159,14 @@ const LineReply = styled.div`
   width: 1px;
   background-color: hsl(0deg 0% 0% / 8%);
   margin: 0 17px 0 0;
+
   @media (min-width: 1000px) {
-    margin: 0 35px 0 35px;
+    margin: 0 35px;
   }
 `;
 
 const ReplyBox = styled.div`
   display: flex;
-  alignitems: center;
   flex-direction: column;
 `;
 const UserBoxButtons = styled.div`
@@ -169,15 +174,15 @@ const UserBoxButtons = styled.div`
   height: fit-content;
   position: absolute;
   right: 20px;
+
   @media (max-width: 614px) {
     bottom: 25px;
   }
 `;
 
 const CurrentUserPill = styled.label`
-  background: hsl(238, 40%, 52%);
+  background: hsl(238deg, 40%, 52%);
   color: white;
-  /* padding: 2px 10px; */
   font-size: 13px;
   height: 20px;
   border-radius: 3px;
@@ -195,17 +200,18 @@ const DeleteButton = styled.button`
   justify-content: space-between;
   font-size: 16px;
   font-weight: 700;
-  color: hsl(358, 79%, 66%);
-  fill: hsl(358, 79%, 66%);
+  color: hsl(358deg, 79%, 66%);
+  fill: hsl(358deg, 79%, 66%);
   margin-right: 10px;
   cursor: pointer;
+
   svg {
     margin-right: 10px;
   }
 
   &:hover {
-    color: hsl(357, 100%, 86%);
-    fill: hsl(357, 100%, 86%);
+    color: hsl(357deg, 100%, 86%);
+    fill: hsl(357deg, 100%, 86%);
   }
 
   @media (min-width: 615px) {
@@ -224,16 +230,17 @@ const EditButton = styled.button`
   justify-content: space-between;
   font-size: 16px;
   font-weight: 700;
-  color: hsl(238, 40%, 52%);
-  fill: hsl(238, 40%, 52%);
+  color: hsl(238deg, 40%, 52%);
+  fill: hsl(238deg, 40%, 52%);
   cursor: pointer;
+
   svg {
     margin-right: 10px;
   }
 
   &:hover {
-    color: hsl(239, 57%, 85%);
-    fill: hsl(239, 57%, 85%);
+    color: hsl(239deg, 57%, 85%);
+    fill: hsl(239deg, 57%, 85%);
   }
 
   @media (min-width: 615px) {
