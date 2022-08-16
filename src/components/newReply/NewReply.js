@@ -16,7 +16,6 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
   };
 
   const handleButtonSend = () => {
-    const time = new Date().toDateString().split(" ");
     setDataUsers({
       ...dataUsers,
       comments: dataUsers.comments.map((c) =>
@@ -38,7 +37,7 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
                   replyingTo: !replyId
                     ? c.user.username
                     : c.replies.map((r) => r.id === replyId && r.user.username),
-                  createdAt: `${time[1]} ${time[2]}`,
+                  createdAt: Date.now(),
                   edit: false,
                   score: 0,
                   user: {

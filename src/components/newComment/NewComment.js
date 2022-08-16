@@ -84,12 +84,13 @@ export const Avatar = styled.img`
 const NewComment = ({ dataUsers, setDataUsers }) => {
   const [valueComment, setValueComment] = useState("");
 
+  console.log(Date.now());
+
   const handleTextArea = (e) => {
     setValueComment(e.target.value);
   };
 
   const handleButtonSend = () => {
-    const time = new Date().toDateString().split(" ");
     setDataUsers({
       ...dataUsers,
       comments: [
@@ -97,7 +98,7 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
         {
           id: Math.floor(Math.random() * (1000000 - 10)) + 10,
           content: valueComment,
-          createdAt: `${time[1]} ${time[2]}`,
+          createdAt: Date.now(),
           edit: false,
           score: 0,
           user: {

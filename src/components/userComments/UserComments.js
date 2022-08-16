@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DeleteCommentModal from "../deleteCommentModal/DeleteCommentModal";
 import EditComment from "../editComment/EditComment";
 import NewReply from "../newReply/NewReply";
+import { timeSince } from "../../utils/time";
 
 const CommentDiv = styled.div`
   background-color: hsl(228, 33%, 97%);
@@ -35,7 +36,7 @@ const HeaderUser = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 250px;
+  width: 280px;
   margin-bottom: 18px;
 `;
 
@@ -368,7 +369,7 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                   {i.user.username !== dataUsers.currentUser.username ? null : (
                     <CurrentUserPill>you</CurrentUserPill>
                   )}
-                  <DateComment>{i.createdAt}</DateComment>
+                  <DateComment>{`${timeSince(i.createdAt)} ago`}</DateComment>
                 </HeaderUser>
               </HeaderComment>
               <div>
@@ -467,7 +468,9 @@ const UserComments = ({ dataUsers, setDataUsers }) => {
                               dataUsers.currentUser.username ? null : (
                                 <CurrentUserPill>you</CurrentUserPill>
                               )}
-                              <DateComment>{r.createdAt}</DateComment>
+                              <DateComment>{`${timeSince(
+                                r.createdAt
+                              )} ago`}</DateComment>
                             </HeaderUser>
                           </HeaderComment>
                           <div>
