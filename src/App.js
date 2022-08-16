@@ -6,10 +6,10 @@ import NewComment from "./components/newComment/NewComment";
 import data from "./data.json";
 
 const AppContainer = styled.div`
-  background: hsl(223, 19%, 93%);
+  background: hsl(223deg, 19%, 93%);
   min-height: 100%;
   width: 100%;
-  padding: 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
   align-items: center;
   display: flex;

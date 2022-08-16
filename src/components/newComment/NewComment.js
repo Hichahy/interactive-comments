@@ -87,8 +87,6 @@ export const Avatar = styled.img`
 const NewComment = ({ dataUsers, setDataUsers }) => {
   const [valueComment, setValueComment] = useState("");
 
-  console.log(Date.now());
-
   const handleTextArea = (e) => {
     setValueComment(e.target.value);
   };
