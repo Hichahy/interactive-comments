@@ -3,7 +3,7 @@ import styled from "styled-components";
 import data from "../../data.json";
 
 export const NewCommentDiv = styled.div`
-  background-color: hsl(228, 33%, 97%);
+  background-color: hsl(228deg, 33%, 97%);
   width: 100%;
   border-radius: 15px;
   display: flex;
@@ -14,13 +14,11 @@ export const NewCommentDiv = styled.div`
   justify-content: space-between;
   padding: 15px;
   box-sizing: border-box;
+
   @media (min-width: 515px) {
-    flex-direcion: row;
     flex-wrap: nowrap;
     padding: 20px;
     align-items: start;
-  }
-  @media (min-width: 515px) {
   }
   -webkit-animation: fadein 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fadein 0.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -42,9 +40,10 @@ export const SendButton = styled.button`
   outline-color: transparent;
   color: white;
   cursor: pointer;
-  background: hsl(238, 40%, 52%);
+  background: hsl(238deg, 40%, 52%);
+
   &:hover {
-    background: hsl(239, 57%, 85%);
+    background: hsl(239deg, 57%, 85%);
   }
 `;
 
@@ -59,14 +58,17 @@ export const TextAreaComment = styled.textarea`
   resize: none;
   outline: 1px solid #80808038;
   font-size: 16px;
-  color: hsl(211, 10%, 45%);
+  color: hsl(211deg, 10%, 45%);
+
   ::placeholder {
     font-family: "Nunito Sans", sans-serif;
     font-size: 16px;
   }
+
   :focus {
-    border: 1px solid hsl(238, 40%, 52%);
+    border: 1px solid hsl(238deg, 40%, 52%);
   }
+
   @media (min-width: 515px) {
     margin-right: 20px;
   }
@@ -75,6 +77,7 @@ export const TextAreaComment = styled.textarea`
 export const Avatar = styled.img`
   width: 35px;
   height: 35px;
+
   @media (min-width: 515px) {
     order: -1;
     margin-right: 20px;

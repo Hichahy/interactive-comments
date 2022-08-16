@@ -20,14 +20,16 @@ const TextAreaEdit = styled.textarea`
   resize: none;
   outline: 1px solid #80808038;
   font-size: 16px;
-  color: hsl(211, 10%, 45%);
+  color: hsl(211deg, 10%, 45%);
   margin-bottom: 20px;
+
   ::placeholder {
     font-family: "Nunito Sans", sans-serif;
     font-size: 16px;
   }
+
   :focus {
-    border: 1px solid hsl(238, 40%, 52%);
+    border: 1px solid hsl(238deg, 40%, 52%);
   }
 `;
 
@@ -41,10 +43,12 @@ const UpdateButton = styled.button`
   outline-color: transparent;
   color: white;
   cursor: pointer;
-  background: hsl(238, 40%, 52%);
+  background: hsl(238deg, 40%, 52%);
+
   &:hover {
-    background: hsl(239, 57%, 85%);
+    background: hsl(239deg, 57%, 85%);
   }
+
   @media (max-width: 615px) {
     margin-bottom: 15px;
   }
