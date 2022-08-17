@@ -45,6 +45,11 @@ export const SendButton = styled.button`
   &:hover {
     background: hsl(239deg, 57%, 85%);
   }
+
+  &:disabled {
+    background: grey;
+    cursor: unset;
+  }
 `;
 
 export const TextAreaComment = styled.textarea`
@@ -126,7 +131,10 @@ const NewComment = ({ dataUsers, setDataUsers }) => {
             placeholder="Add a comment..."
           ></TextAreaComment>
           <Avatar src={data.currentUser.image.png} />
-          <SendButton onClick={valueComment.length > 0 && handleButtonSend}>
+          <SendButton
+            disabled={valueComment.length > 0 ? false : true}
+            onClick={handleButtonSend}
+          >
             Send
           </SendButton>
         </NewCommentDiv>

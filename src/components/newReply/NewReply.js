@@ -67,7 +67,12 @@ const NewComment = ({ dataUsers, setDataUsers, id, replyId }) => {
             placeholder="Add a comment..."
           ></TextAreaComment>
           <Avatar src={data.currentUser.image.png} />
-          <SendButton onClick={valueReply.length > 0 && handleButtonSend}>Reply</SendButton>
+          <SendButton
+            disabled={valueReply.length > 0 ? false : true}
+            onClick={handleButtonSend}
+          >
+            Reply
+          </SendButton>
         </NewCommentDiv>
       </NewCommentContainer>
     </div>
