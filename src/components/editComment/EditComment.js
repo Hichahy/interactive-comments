@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const EditBox = styled.div`
@@ -49,13 +49,18 @@ const UpdateButton = styled.button`
     background: hsl(239deg, 57%, 85%);
   }
 
+  &:disabled {
+    background: grey;
+    cursor: unset;
+  }
+
   @media (max-width: 615px) {
     margin-bottom: 15px;
   }
 `;
 
-const EditComment = ({dataUsers, setDataUsers, id, content}) => {
-const [editValue, setEditValue] = useState(content)
+const EditComment = ({ dataUsers, setDataUsers, id, content }) => {
+  const [editValue, setEditValue] = useState(content);
 
   const handleUpadateComment = (id) => {
     setDataUsers({
@@ -83,16 +88,17 @@ const [editValue, setEditValue] = useState(content)
     });
   };
 
-
   const handleEditValue = (e) => {
     setEditValue(e.target.value);
   };
 
-
   return (
     <EditBox>
       <TextAreaEdit onChange={handleEditValue} value={editValue}></TextAreaEdit>
-      <UpdateButton onClick={() => handleUpadateComment(id)}>
+      <UpdateButton
+        disabled={editValue.length > 0 ? false : true}
+        onClick={() => handleUpadateComment(id)}
+      >
         Update
       </UpdateButton>
     </EditBox>
